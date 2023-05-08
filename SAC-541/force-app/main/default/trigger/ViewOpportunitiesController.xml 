@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexTrigger>
+  <apiVersion>48.0</apiVersion>
+  <packageVersions>
+    <package>09T90000001X8XB</package>
+    <version>1.0</version>
+  </packageVersions>
+  <status>Active</status>
+  <trigger>
+    <fullName>ViewOpenOpportunity</fullName>
+    <apiVersion>48.0</apiVersion>
+    <description>This trigger will display open Opportunities in the Salesforce Lightning UI</description>
+    <triggerSource>SALESFORCE</triggerSource>
+    <triggerType>ON_DEMAND</triggerType>
+    <status>Active</status>
+    <object>Opportunity</object>
+    <scope>User</scope>
+    <conditions>
+      <condition>
+        <type>ISPICKVAL</type>
+        <field>StageName</field>
+        <operator>!=</operator>
+        <value>Closed Won</value>
+      </condition>
+    </conditions>
+    <actions>
+      <action>
+        <type>DISPLAY_OPPORTUNITY</type>
+        <field>Owner.Name</field>
+        <field>StageName</field>
+        <field>Amount</field>
+        <field>CloseDate</field>
+        <filter>
+          <type>SORT</type>
+          <field>Amount</field>
+          <direction>asc</direction>
+        </filter>
+        <filter>
+          <type>SEARCH</type>
+        </filter>
+        <filter>
+          <type>PAGINATE</type>
+        </filter>
+      </action>
+    </actions>
+  </trigger>
+</ApexTrigger>
